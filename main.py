@@ -1,5 +1,9 @@
-def obtener_curso():
-    curso = input('Inserte el nombre del curso: ').upper()
+def obtener_nombre_estudiante():
+    nombre = input('Ingrese el nombre del estudiante: ')
+    return nombre
+
+def obtener__nombre_curso():
+    curso = input('Ingrese el nombre del curso: ').upper()
     return curso
 
 def obtener_puntos_totales():
@@ -10,7 +14,6 @@ def obtener_puntos_totales():
             break
         except ValueError:
             print('La opción no es valida, por favor intentelo de nuevo')
-    
 
 def obtener_puntos_estudiante():
     while True:
@@ -32,16 +35,26 @@ def calcular_calificacion():
     else:
         print('No se puede dividir por 0')
 
-
 def reiniciar():
     while True:
         reiniciar = input('¿Desea ingresar otro estudiante? (Si o No) ').lower()
 
         if reiniciar == 'si':
-            calcular_calificacion()
+            main()
             break
         elif reiniciar == 'no':
             print('Muchas Gracias por usar nuestros servicios')
             break
         else:
             print('Opción no valida ')
+
+def main():
+    nombre = obtener_nombre_estudiante()
+    curso = obtener__nombre_curso()
+    calificacion = calcular_calificacion()
+
+    print(f'El esudiante {nombre.upper()} en el curso {curso}, ha obtenido una calificación de: {calificacion}')
+
+    reiniciar()
+
+main()
