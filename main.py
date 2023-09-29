@@ -5,7 +5,7 @@ def obtener_nombre_estudiante():
     nombre = input('Ingrese el nombre del estudiante: ')
     return nombre
 
-def obtener__nombre_curso():
+def obtener_nombre_curso():
     """
     Función para obtener el nombre del curso
     """
@@ -21,7 +21,6 @@ def obtener_puntos_totales():
         try:
             puntos_totales = int(input('Ingrese los puntos totales obtenidos en el curso: '))
             return puntos_totales
-            break
         except ValueError:
             print('La opción no es valida, por favor intentelo de nuevo')
 
@@ -34,25 +33,27 @@ def obtener_puntos_estudiante():
         try:
             puntos_estudiante = int(input('Ingrese los puntos obtenidos por el estudiante: '))
             return puntos_estudiante
-            break
         except ValueError:
             print('La opción no es valida, por favor intentelo de nuevo')
 
 def calcular_calificacion():
     """
     Función para calcular la nota final del curso, cuenta con manejo de errores en caso 
-    que se llegue a dividir entre 0 y tambien si las notas del estudiante son mayores
-    que las notas del curso.
+    que se llegue a dividir entre 0 y si el estudiante tiene más puntos que del curso.
+    Nota la calificación total del curso es entera, es decir no da el resultado en 
+    decimales.
     """
-    puntos_clase = obtener_puntos_totales()
-    puntos_estudiante  = obtener_puntos_estudiante()
+    while True:
+        puntos_clase = obtener_puntos_totales()
+        puntos_estudiante  = obtener_puntos_estudiante()
 
-    if (puntos_clase > 0) and (puntos_clase >= puntos_estudiante):
-        calificacion_final = (puntos_estudiante / puntos_clase) * 100
-        return calificacion_final 
-    else:
-        print('No se puede dividir por 0')
-        calcular_calificacion()
+        if puntos_clase == 0:
+            print('No se puede dividir por 0')
+        elif puntos_clase < puntos_estudiante:
+            print('El estudiante cuenta con más puntos de los que hay en curso\nPor Favor verifique los datos')
+        else:
+            calificacion_final = (puntos_estudiante // puntos_clase) * 100
+            return calificacion_final
 
 def reiniciar():
     """
@@ -77,10 +78,10 @@ def main():
     para que se ejecure correctamente el código
     """
     nombre = obtener_nombre_estudiante()
-    curso = obtener__nombre_curso()
+    curso = obtener_nombre_curso()
     calificacion = calcular_calificacion()
-    
-    print(f'El esudiante {nombre.upper()} en el curso {curso}, ha obtenido una calificación de: {calificacion}')
+
+    print(f'El esudiante {nombre.upper()} en el curso {curso.upper()}, ha obtenido una calificación de: {calificacion}')
 
     reiniciar()
 
